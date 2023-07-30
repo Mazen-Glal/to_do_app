@@ -1,6 +1,9 @@
+import 'package:awesome_drawer_bar/awesome_drawer_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:to_do/layout/drawer.dart';
 import 'package:to_do/shared/cubit/cubit.dart';
 import 'package:to_do/shared/cubit/states.dart';
 
@@ -22,12 +25,39 @@ class HomeLayout extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-              key: scaffoldKey,
-              appBar: AppBar(
+
+            // drawer: AwesomeDrawerBar(
+            //   disableOnCickOnMainScreen: true,
+            //   backgroundColor: Colors.yellow,
+            //   openCurve: Curves.fastOutSlowIn,
+            //   closeCurve: Curves.bounceIn,
+            //   borderRadius: 12,
+            //   shadowColor: Colors.black12,
+            //   showShadow: true,
+            //   slideWidth:(MediaQuery.of(context).size.width/3)*1.7 ,
+            //   angle: -20.0,
+            //   menuScreen: const Draweer(),
+            //   mainScreen: Container(),
+            // ),
+
+            drawer:  Drawer(
+              backgroundColor: Colors.lightBlue.shade600,
+              elevation: 0,
+              width: (MediaQuery.of(context).size.width/3)*1.7,
+              child: const Draweer(),
+            ),
+            key: scaffoldKey,
+            appBar: AppBar(
+              actions: const [
+                Padding(
+                  padding: EdgeInsets.only(right: 10.0),
+                  child: Icon(FontAwesomeIcons.listCheck),
+                )
+              ],
                   title: Text(cubit.titles[cubit.currentIndex],
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold))),
-              floatingActionButton: FloatingActionButton(
+            floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   if (cubit.isBottomSheetShown == true) {
                     if (formKey.currentState!.validate())
@@ -112,7 +142,7 @@ class HomeLayout extends StatelessWidget {
                                                 initialDate: DateTime.now(),
                                                 firstDate: DateTime.now(),
                                                 lastDate: DateTime.parse(
-                                                    '2022-10-01'))
+                                                    '2023-10-01'))
                                             .then((value) {
                                           dateController.text =
                                               DateFormat.yMMMd().format(value!);
@@ -138,21 +168,18 @@ class HomeLayout extends StatelessWidget {
                 },
                 child: Icon(cubit.buttonIcon),
               ),
-              bottomNavigationBar: BottomNavigationBar(
+            bottomNavigationBar: BottomNavigationBar(
                 onTap: (index) {
                   cubit.onChangeBottomSheetItem(index);
                 },
                 currentIndex: cubit.currentIndex,
                 items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.menu), label: 'tasks'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.check_circle_outlined), label: 'Done'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.archive_outlined), label: 'Archived'),
+                  BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'tasks'),
+                  BottomNavigationBarItem(icon: Icon(Icons.check_circle_outlined), label: 'Done'),
+                  BottomNavigationBarItem(icon: Icon(Icons.archive_outlined), label: 'Archived'),
                 ],
               ),
-              body: cubit.screens[cubit.currentIndex]
+            body: cubit.screens[cubit.currentIndex],
           );
         },
       ),

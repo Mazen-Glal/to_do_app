@@ -27,9 +27,9 @@ buildTaskItem(Map record,context)
               children:  [
                 Text(
                   '${record['title']}',
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
                 Text(

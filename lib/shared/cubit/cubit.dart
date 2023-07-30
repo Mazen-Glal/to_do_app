@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 class AppCubit extends Cubit<AppStates>
 {
   AppCubit() : super(InitState());
-  static AppCubit get(context)=> BlocProvider.of(context);
+
+  static AppCubit get (context)=> BlocProvider.of(context);
   late Database database;
   int currentIndex = 0;
   List<Map> newTasks =[];

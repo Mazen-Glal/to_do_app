@@ -15,7 +15,8 @@ class NewTasksScreen extends StatelessWidget {
       builder: (context, state) =>AppCubit.get(context).newTasks.isEmpty ? forEmpty() : ListView.separated(
           itemBuilder: (context, index) => buildTaskItem(AppCubit.get(context).newTasks[index],context),
           separatorBuilder: (context, index) =>  Container(height: 1,color: Colors.grey[200]),
-          itemCount: AppCubit.get(context).newTasks.length
+          itemCount: AppCubit.get(context).newTasks.length,
+        physics: const BouncingScrollPhysics(),
       ),
     );
   }

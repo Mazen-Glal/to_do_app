@@ -16,7 +16,9 @@ class DoneTasksScreen extends StatelessWidget {
       builder: (context, state) => AppCubit.get(context).doneTasks.isEmpty ? forEmpty() : ListView.separated(
           itemBuilder: (context, index) => buildTaskItem(AppCubit.get(context).doneTasks[index],context),
           separatorBuilder: (context, index) =>  Container(height: 1,color: Colors.grey[200]),
-          itemCount: AppCubit.get(context).doneTasks.length
+          itemCount: AppCubit.get(context).doneTasks.length,
+        physics: const BouncingScrollPhysics(),
+
       ),
     );
   }
